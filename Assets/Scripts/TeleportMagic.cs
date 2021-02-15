@@ -9,14 +9,19 @@ public class TeleportMagic : MonoBehaviour
         switch (collision.tag)
         {
             case "Geometry":
-                if (GetComponent<SpriteRenderer>().flipX) GameObject.FindGameObjectWithTag("Player").transform.position = transform.position + Vector3.right;
-                else GameObject.FindGameObjectWithTag("Player").transform.position = transform.position - Vector3.right;
+                if (GetComponent<SpriteRenderer>().flipX) GameObject.FindGameObjectWithTag("Player").transform.position = transform.position + (Vector3.right * 0.5f);
+                else GameObject.FindGameObjectWithTag("Player").transform.position = transform.position - (Vector3.right * 0.5f);
                 Destroy(gameObject);
                 break;
 
             case "LightBlock":
-                if (GetComponent<SpriteRenderer>().flipX) GameObject.FindGameObjectWithTag("Player").transform.position = transform.position + Vector3.right;
-                else GameObject.FindGameObjectWithTag("Player").transform.position = transform.position - Vector3.right;
+                if (GetComponent<SpriteRenderer>().flipX) GameObject.FindGameObjectWithTag("Player").transform.position = transform.position + (Vector3.right*0.5f);
+                else GameObject.FindGameObjectWithTag("Player").transform.position = transform.position - (Vector3.right * 0.5f);
+                Destroy(gameObject);
+                break;
+            case "Physics":
+                if (GetComponent<SpriteRenderer>().flipX) GameObject.FindGameObjectWithTag("Player").transform.position = transform.position + (Vector3.right * 0.5f);
+                else GameObject.FindGameObjectWithTag("Player").transform.position = transform.position - (Vector3.right * 0.5f);
                 Destroy(gameObject);
                 break;
         }

@@ -7,11 +7,15 @@ public class HUDController : MonoBehaviour
 {
     private GameObject player;
 
-    public TMPro.TextMeshProUGUI healthText;
+    //public TMPro.TextMeshProUGUI healthText;
     public TMPro.TextMeshProUGUI magicText;
 
     public Image[] spellSlots;
     public Sprite[] spellIcons;
+
+    public Image[] heartSlots;
+
+    public Sprite heartIcon;
 
     private void Start()
     {
@@ -22,7 +26,11 @@ public class HUDController : MonoBehaviour
     {
         string NameOfSpell = "";
 
-        healthText.text = "Health: " + player.GetComponent<PlayerController>().health.ToString();
+        //healthText.text = "Health: " + player.GetComponent<PlayerController>().health.ToString();
+
+        foreach (Image i in heartSlots) i.enabled = false;
+        for (int i = 0; i < player.GetComponent<PlayerController>().health; i++) heartSlots[i].enabled = true;
+
         for (int i = 0; i < player.GetComponent<ShootProjectile>().spells.Count; i++)
         {
             switch (player.GetComponent<ShootProjectile>().spells[i].tag)

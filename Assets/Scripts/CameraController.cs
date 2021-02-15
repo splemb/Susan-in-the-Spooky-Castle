@@ -22,10 +22,10 @@ public class CameraController : MonoBehaviour
     {
         float fixedX = following.position.x;
         float fixedY = following.position.y;
-        if (following.position.x < lowerBounds.x) fixedX = lowerBounds.x;
-        else if (following.position.x > upperBounds.x) fixedX = upperBounds.x;
-        if (following.position.y < lowerBounds.y) fixedY = lowerBounds.y;
-        else if (following.position.y > upperBounds.y) fixedY = upperBounds.y;
+        if (following.position.x - 10 < lowerBounds.x) fixedX = lowerBounds.x + 10;
+        else if (following.position.x + 10 > upperBounds.x) fixedX = upperBounds.x - 10;
+        if (following.position.y - 6 < lowerBounds.y) fixedY = lowerBounds.y + 6;
+        else if (following.position.y + 6 > upperBounds.y) fixedY = upperBounds.y - 6;
 
         transform.position = new Vector3(fixedX, fixedY, -10);
     }

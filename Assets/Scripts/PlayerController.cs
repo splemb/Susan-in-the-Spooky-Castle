@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     public float canJump;
     public bool doubleJumped;
 
-    public int health = 10;
+    public int health = 3;
 
     private bool dead = false;
 
@@ -56,10 +56,7 @@ public class PlayerController : MonoBehaviour
             doubleJumped = true;
             GetComponent<ParticleSystem>().Play();
         }
-
-        if (transform.position.y < Camera.main.GetComponent<CameraController>().lowerBounds.y - 8 && !dead) death();
-
-        
+        if (transform.position.y < Camera.main.GetComponent<CameraController>().lowerBounds.y - 8 && !dead) death(); 
     }
 
     private void FixedUpdate()
@@ -192,7 +189,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
 
-        health = 10;
+        health = 3;
         GetComponent<Collider2D>().enabled = true;
         controlLock = 0;
         transform.position = respawnPoint;

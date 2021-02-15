@@ -7,11 +7,15 @@ public class EnemyController : MonoBehaviour
     private Rigidbody2D rb;
     public int speed;
     public int health = 1;
+    public SpriteRenderer sprite;
+
+    private int invincible = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
 
         switch (tag)
         {
@@ -46,18 +50,35 @@ public class EnemyController : MonoBehaviour
                     break;
 
             }
+
+            if (invincible > 0)
+            {
+                invincible--;
+                sprite.color = Color.red;
+                if (invincible % 4 == 0) sprite.enabled = !sprite.enabled;
+            }
+            else
+            {
+                invincible = 0;
+                sprite.color = Color.white;
+                sprite.enabled = true;
+            }
         }
     }
 
     void TakeDamage(int damage)
     {
-        health -= damage;
-        if (damage >= 0) death();
+        if (invincible <= 0)
+        {
+            health -= damage;
+            invincible = 10;
+            if (health <= 0) death();
+        }
     }
 
     void FlipGravity()
     {
-        GetComponent<SpriteRenderer>().flipY = !GetComponent<SpriteRenderer>().flipY;
+        sprite.flipY = !sprite.flipY;
         rb.gravityScale *= -1;
     }
 
@@ -68,7 +89,7 @@ public class EnemyController : MonoBehaviour
         rb.angularVelocity = 170;
         rb.velocity = Vector3.zero;
         rb.AddForce(new Vector3(0, 10, 0), ForceMode2D.Impulse);
-        GetComponent<SpriteRenderer>().color = Color.red;
+        sprite.color = Color.red;
         foreach (Collider2D collider in GetComponents<Collider2D>()) collider.enabled = false;
         StartCoroutine("remove");
     }
@@ -77,6 +98,5 @@ public class EnemyController : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         Destroy(gameObject);
-        
     }
 }

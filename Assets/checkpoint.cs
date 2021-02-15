@@ -14,10 +14,13 @@ public class checkpoint : MonoBehaviour
         switch (collision.tag)
         {
             case "Player":
-                collision.SendMessage("updateRespawnPoint", transform.position, SendMessageOptions.DontRequireReceiver);
-                foreach (GameObject checkpoint in GameObject.FindGameObjectsWithTag("Checkpoint")) checkpoint.GetComponentInChildren<SpriteRenderer>().color = Color.red;
-                GetComponentInChildren<SpriteRenderer>().color = Color.white;
-                GetComponent<AudioSource>().Play();
+                if (GetComponentInChildren<SpriteRenderer>().color != Color.white)
+                {
+                    collision.SendMessage("updateRespawnPoint", transform.position, SendMessageOptions.DontRequireReceiver);
+                    foreach (GameObject checkpoint in GameObject.FindGameObjectsWithTag("Checkpoint")) checkpoint.GetComponentInChildren<SpriteRenderer>().color = Color.red;
+                    GetComponentInChildren<SpriteRenderer>().color = Color.white;
+                    GetComponent<AudioSource>().Play();
+                }
                 break;
         }
     }

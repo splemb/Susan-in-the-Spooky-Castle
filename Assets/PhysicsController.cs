@@ -7,6 +7,8 @@ public class PhysicsController : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
 
+    public bool roll;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -20,6 +22,6 @@ public class PhysicsController : MonoBehaviour
 
     private void Update()
     {
-        sprite.transform.Rotate(0, 0, rb.velocity.magnitude * -rb.velocity.normalized.x * Mathf.Sign(rb.gravityScale));
+        if (roll) sprite.transform.Rotate(0, 0, rb.velocity.magnitude * -rb.velocity.normalized.x * Mathf.Sign(rb.gravityScale));
     }
 }

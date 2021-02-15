@@ -27,6 +27,6 @@ public class ButtonController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if ((collision.tag == "Player" || collision.tag == "Physics") && !used) { GetComponent<SpriteRenderer>().sprite = sprites[0]; }
+        if ((collision.tag == "Player" || collision.tag == "Physics") && !used) { GetComponent<SpriteRenderer>().sprite = sprites[0]; isActive = !isActive; }
     }
 }
