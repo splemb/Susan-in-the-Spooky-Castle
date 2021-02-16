@@ -9,6 +9,8 @@ public class EnemyController : MonoBehaviour
     public int health = 1;
     public SpriteRenderer sprite;
 
+    public GameObject drop;
+
     private int invincible = 0;
 
     // Start is called before the first frame update
@@ -92,6 +94,10 @@ public class EnemyController : MonoBehaviour
         sprite.color = Color.red;
         foreach (Collider2D collider in GetComponents<Collider2D>()) collider.enabled = false;
         StartCoroutine("remove");
+        if (drop != null)
+        {
+            Instantiate(drop, transform.position, Quaternion.identity);
+        }
     }
 
     IEnumerator remove()
